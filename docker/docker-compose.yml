@@ -1,0 +1,43 @@
+version: '3'
+
+name: 'spring-labs'
+
+services:
+  spring-labs-mysql:
+    image: mysql:8.0.32
+    ports:
+      - "3306:3306"
+    env_file:
+      - ../env/db.env
+    container_name: spring-labs-mysql
+    environment:
+      TZ: Asia/Seoul
+    volumes:
+      - spring-labs:/var/lib/spring-labs/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    restart: always
+
+  spring-labs-test-mysql:
+    image: mysql:8.0.32
+    ports:
+      - "13306:3306"
+    env_file:
+      - ../env/test-db.env
+    container_name: spring-labs-test-mysql
+    environment:
+      TZ: Asia/Seoul
+    volumes:
+      - spring-test-labs:/var/lib/spring-test-labs/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - "mysqld"
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    restart: always
+volumes:
+  spring-labs:
+  spring-test-labs:
