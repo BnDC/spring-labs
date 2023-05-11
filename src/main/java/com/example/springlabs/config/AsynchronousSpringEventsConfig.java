@@ -26,7 +26,7 @@ public class AsynchronousSpringEventsConfig {
 	@Bean(name = "applicationEventMulticaster")
 	public ApplicationEventMulticaster simpleApplicationEventMulticaster() {
 		SimpleApplicationEventMulticaster simpleApplicationEventMulticaster = new SimpleApplicationEventMulticaster();
-		simpleApplicationEventMulticaster.setTaskExecutor(new SimpleAsyncTaskExecutor());
+		simpleApplicationEventMulticaster.setTaskExecutor(eventExecutor());
 		return simpleApplicationEventMulticaster;
 	}
 }
