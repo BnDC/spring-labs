@@ -1,6 +1,6 @@
 spring:
   profiles:
-    include: db
+    include: dbtest
 
   jpa:
     defer-datasource-initialization: true
@@ -28,5 +28,6 @@ spring:
 
 logging:
   level:
+    root: trace
     org.hibernate.sql: debug
     org.hibernate.type: trace
